@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body ng-app="mainApp">
+		<!--
+			AngularJS 提供了很好的依赖注入机制，以下5个核心组件用来作为依赖注入：
+			value
+			factory
+			service
+			provider
+			constant
+		-->
+		<!--
+			value是一个简单的javascript对象，用于向控制器传递值（配置阶段）：
+		-->
+		<div ng-controller="CalcController">
+			{{result}}
+		</div>
+		<div ng-controller="CalcController2">
+			{{result}}
+		</div>
+		<div ng-controller="CalcController3">
+			{{configParam}}
+		</div>
+		<div ng-controller="CalcController4">
+			{{constantValue}}
+		</div>
+	</body>
+
+</html>
+<script>
+	//定义一个模块
+	var mainApp = angular.module("mainApp", []);
+	//创建自定义服务
+	mainApp.service("CalcService", function() {
+		this.square = function(num) {
+			return num.toString();
+		}
+	});
+
+	/*value 注入方式*/
+	//创建value对象"defaultInput"并传递数据
+	mainApp.value("defaultInput", 5);
+	//将"defaultInput"注入到控制器
+	mainApp.controller("CalcController", function($scope, CalcService, defaultInput) {
+		$scope.number = defaultInput;
+		$scope.result = CalcService.square($scope.number);
+
+		$scope.square = function() {
+			$scope.result = CalcService.square($scope.number);
+		}
+	});
+
+	/*
+	 * factory 注入方式
+	 * factory是一个函数用于返回值，在service和controller创建时需要
+	 */
+	//创建factory
+	mainApp.factory("mathService", function() {
+		var factory = {};
+
+		factory.multiply = function(a, b) {
+			return a * b;
+		}
+		return factory;
+	});
+	//创建服务，并调用factory
+	mainApp.service("CalcService2", function(mathService) {
+		this.square = function(a) {
+			return mathService.multiply(a, a);
+		}
+	});
+	mainApp.controller("CalcController2", function($scope, CalcService2) {
+		$scope.number = 10;
+		$scope.result = CalcService2.square($scope.number);
+	});
+
+	/*
+	 * provider,provider中提供了一个factory方法get(),它用于返回value/service/factory.
+	 */
+	mainApp.config(function($provide) {
+		$provide.provider('MathService3', function() {
+			this.$get = function() {
+				var factory = {};
+				factory.multiply = function(a, b) {
+					return a * b;
+				}
+				return factory;
+			}
+		});
+	});
+	mainApp.controller("CalcController3",function($scope,MathService3){
+		$scope.result=MathService3.multiply(100,20);
+	});
+	
+	/*	 
+	 * constant(常量)用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的。
+	 * 不是全局变量
+	 */
+	mainApp.constant("configParam","constant value");
+	mainApp.controller("CalcController4",function($scope,configParam){
+		$scope.constantValue=configParam;
+	});
+</script>

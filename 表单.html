@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body>
+		<!--
+			表单元素：
+			input元素，
+			select元素，
+			button元素，
+			textarea元素
+			
+			表单验证属性：
+			$dirty:表单有填写记录
+			$valid:字段内容合法的
+			$invalid:字段内容是非法的
+			$pristine:表单没有填写记录
+		-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<form name="myForm" novalidate>
+				姓名：<input type="text" ng-model="name" required/>
+				<span ng-show="myForm.name.$dirty && myForm.name.$invalid">
+					<span ng-show="myForm.name.$error.required">姓名不能为空</span>
+				</span>			
+				<br>
+				邮箱：<input type="email" ng-model="Email" required />
+				<span ng-show="myForm.Email.$dirty || myForm.Email.$invalid">
+					<span ng-show="myForm.Email.$error.required">邮箱不能为空</span>
+					<span ng-show="myForm.Email.$error.email">邮箱错误</span>
+				</span>
+				<br> 地址：
+				<input type="text" ng-model="address" /><br> 
+				省份：
+				<select ng-model="province" ng-options="x.name for x in listSelect"></select>
+				<br>备注:
+				<textarea ng-model="remark"></textarea>
+				<input type="button" value="提交" ng-click="submit();"
+					ng-disabled="btnDisabled" /><br>
+				<span ng-bind="result"></span>
+			</form>
+		</div>
+		<!--
+			novalidate:h5新增，禁用使用浏览器默认验证
+		-->
+	</body>
+
+</html>
+<script>
+	angular.module("myApp", []).controller("myCtrl", function($scope) {
+		$scope.listSelect = [
+			{ name: "河南", id: 1 },
+			{ name: "河南1", id: 2 },
+			{ name: "河南2", id: 3 }
+		];
+//		$scope.btnDisabled=myForm.name.$dirty && myForm.name.$invalid
+//			|| myForm.Email.$dirty && myForm.Email.$invalid;
+		$scope.submit = function() {
+			var name = $scope.name;
+			var address = $scope.address;
+			if(!name) {
+				alert("请输入姓名");
+				return;
+			} else if(!address) {
+				alert("请输入地址")
+				return;
+			}
+
+			$scope.result = "信息：" + name + "," + address + "," +
+				$scope.remark + "," + $scope.province.name + "已提交！";
+		};
+	});
+</script>

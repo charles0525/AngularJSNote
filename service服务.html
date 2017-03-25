@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+			在AngularJS中，服务是一个函数或对象，可在你的AngularJS应用中使用。
+		-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			{{myUrl}}<br>
+			<p>
+				{{httpResult}}
+			</p>
+			<p>
+				{{timeoutText}}
+			</p>
+			<p>
+				{{intervalText}}
+			</p>
+			<p>
+				{{customerService}}
+			</p>
+		</div>
+	</body>
+</html>
+<script>	
+	var app=angular.module("myApp",[]);
+	//创建自定义服务
+	app.service("myService",function(){
+		this.myFunc=function(x){
+			return x.toString();
+		}
+	});
+	
+	app.controller("myCtrl",function($scope,$rootScope,$location,$http,
+		$timeout,$interval,myService){
+		//$location服务是作为一个参数传递到controller中。如果要使用需要在controller中定义
+		$scope.myUrl=$location.absUrl();
+		
+		//$http ,服务向服务器发送请求，应用响应服务器传送过来的数据
+		$http.get("data/test.json").then(function(rsp){
+			$scope.httpResult=rsp.data;
+		});
+		
+		//$timeout服务,对应window.setTimeout()
+		$timeout(function(){
+			$scope.timeoutText="延迟了2s显示出来咯";
+		},2000);
+		
+		//$interval(),对应window.serInterval()
+		$interval(function(){
+			$scope.intervalText=($scope.intervalText||1)+1;
+		},1000);
+		
+		//调用自定义服务
+		$scope.customerService=myService.myFunc(250);
+	});
+	
+</script>

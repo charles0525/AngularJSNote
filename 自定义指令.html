@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--创建自定义指令
+			使用.directive()函数添加自定义指令，要调用自定义指令，元素上需要添加自定义指令名
+			可以通过以下方式调用：
+			1.元素名、
+			2.属性、
+			3.类名(注意使用类名，返回值要加restrict:"C")、
+			4.注释来调用指令(需加districe:"M",replace:true)
+			directive:限制调用方式，默认EA（词意首字母大写），M：注释调用；A：属性调用，E作为元素名使用，C:类名使用
+		-->
+		<div ng-app="myApp">
+			<test-directive></test-directive>
+			<div test2-directive></div>
+			<div class="test3-directive"></div>
+			<!-- directive:test4-directive -->
+		</div>
+	</body>
+</html>
+<script>
+	var app=angular.module("myApp",[]);
+	app.directive("testDirective",function(){
+		return {
+			template:"<h1>通过元素创建自定义指令</h1>"
+		};
+	});
+	app.directive("test2Directive",function(){
+		return{
+			template:"<h1>通过属性创建自定义指令2</h1>"
+		};
+	});
+	app.directive("test3Directive",function(){
+		return{
+			template:"<h1>通过类名创建自定义指令3</h1>",
+			restrict:"C"
+		};
+	});
+	app.directive("test4Directive",function(){
+		return {
+			template:"<h1>通过注释创建自定义指令4</h1>",
+			restrict:"M",
+			replace:true
+		};
+	});
+</script>

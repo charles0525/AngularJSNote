@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<a href="#" ng-click="clickFun()">点我</a> {{clickNum}}
+		</div>
+	</body>
+</html>
+<script>
+	angular.module("myApp",[]).controller("myCtrl",function($scope){
+		$scope.clickNum=1;
+		$scope.clickFun=function(){
+			$scope.clickNum+=1;
+		};
+	});
+</script>

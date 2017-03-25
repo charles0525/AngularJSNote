@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<p>
+				<!--
+					ng-disabled
+				-->
+				<input type="button" ng-disabled="myDisabled" value="提交"><br>
+				<input type="checkbox" ng-model="myDisabled" />按钮<br>
+				{{myDisabled}}
+				<!--
+					ng-show显示或隐藏HTML元素
+				-->				
+				<p ng-show="myDisabled">看的见我吗1</p>
+				<!--
+					ng-show隐藏或显示HTML元素
+				-->	
+				<p ng-hide="myDisabled">看得见我吗2</p>
+			</p>
+		</div>
+	</body>
+</html>
+<script>
+	angular.module("myApp",[]).controller("myCtrl",function($scope,$rootScope){
+		$scope.myDisabled=true;
+	});
+</script>

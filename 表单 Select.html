@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body>
+		<!--
+			AngularJS 可以使用数组或对象创建一个下拉列表选项
+			使用ng-options创建选择框
+		-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<select ng-init="selectedName=names[1]" ng-model="selectedName" ng-options="x for x in names">
+			</select>
+			<select ng-init="person=persons[0]" ng-model="person" ng-options="x.name for x in persons">
+			</select>
+			<br>
+			<select ng-model="province" ng-init="province=provinces[0]" 
+				ng-options="x for (x,y) in provinces"></select>
+			<p>
+				您选的姓名是：{{person.name}}<br>
+				选择的省份是：{{province.name}}
+			</p>
+		</div>
+	</body>
+
+</html>
+<script>
+	angular.module("myApp", []).controller("myCtrl", function($scope, $rootScope) {
+		$scope.names = ["A", "B", "C", "D", "E"];
+		$scope.persons = [
+			{ name: "张三", age: 20 },
+			{ name: "李四", age: 22 },
+			{ name: "王五", age: 18 },
+			{ name: "赵六", age: 16 }
+		];
+		$scope.provinces = [
+			{ name: "河南省", age: 1 },
+			{ name: "浙江省", age: 2 },
+			{ name: "辽宁省", age: 3 },
+			{ name: "江苏省", age: 4 }
+		];
+	});
+</script>

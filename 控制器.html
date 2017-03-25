@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body>
+		<!--
+			AngularJS 控制器控制其应用程序的数据，
+			AngularJS 控制器是常规的JavaScript对象，由标准的JavaScript对象的构造函数创建
+			ng-controller 指令定义了应用程序的控制器。
+		-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<ul>
+				<li ng-repeat="m in listData">
+					<a ng-onclick="{{hoverFunc(m.title)}}" href="{{m.link}}">{{m.title}}</a>
+				</li>				
+			</ul>
+		</div>
+		<!--
+			外部文件控制器，在大型的项目中，通常是把控制器存储在外部文件中
+		-->
+	</body>
+
+</html>
+<script>
+	var app = angular.module("myApp", []);
+	app.controller("myCtrl", function($scope, $rootScope) {		
+		$scope.listData = [
+			{ title: "标题1", link: "#" },
+			{ title: "标题2", link: "#" }
+		];
+		$scope.hoverFunc=function(s){
+			console.log(s);
+		}
+	});
+</script>

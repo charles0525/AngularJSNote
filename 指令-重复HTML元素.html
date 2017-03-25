@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.item{color:red;font-size:1em;}
+		</style>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+			ng-repeat: html循环
+			从带有ng-repeat标识开始循环
+		-->
+		<!--<div ng-app="" ng-init="list=[{name:'charles',age:20},{name:'sea',age:18}]">
+			<div>
+				<p ng-repeat="x in list" class="item">姓名：{{x.name}}  年纪：{{x.age}}</p>
+			</div>
+		</div>-->
+		<div ng-app="" ng-init="points=[2,3,1,4,0]">
+			<p ng-repeat="x in points">
+				{{x}} &nbsp;
+			</p>
+		</div>
+	</body>
+</html>

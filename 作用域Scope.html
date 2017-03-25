@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+			Scope作用域作用范围，在大型项目中，HTML DOM中可能有多个作用域，这时你就需要知道
+			你使用的scope对应的作用域是哪儿一个
+		-->
+		<!--
+			根作用域 $rootScope，所有的应用都有一个$rootScope，它可以作用在ng-app指定包含的
+			所有HTML元素中。
+			$rootScope可作用于整个应用中。用$rootScope定义的值，可以在各个controler中使用。
+		-->
+		<!--
+			Scope(作用域)是应用在HTML(视图)和JavaScript(控制器)之间的纽带
+			Scope是一个对象，有可用的方法和属性，可应用在视图和控制器上	,
+			控制器中的属性对应了视图上的属性
+		-->
+		<div ng-app="myApp">
+			<div ng-controller="myCtrl">
+				姓名：<input type="text" ng-model="name" /><br>
+				地址：<input type="text" ng-model="address" /><br>
+				<span>{{result}}</span><br>
+				<input type="button" ng-click="submit()" value="提交" />
+				
+				<h1>HTML重复列表</h1>
+				<p ng-repeat="x in listJson">
+					{{x.name}} {{x.address}}
+	 			</p>
+	 			<p>
+	 				根作用域：{{account}}
+	 			</p>
+			</div>
+			<div ng-controller="myCtrl2">
+				帐号：<input type="text" ng-model="account" /><br>
+				密码：<input type="text" ng-model="pwd" />
+			</div>
+		</div>	
+		
+	</body>
+</html>
+<script>
+	var app=angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		//控制器中的属性对应了视图上的属性
+		$scope.name="charles";
+		$scope.address="杭州市";
+		$scope.submit=function(){
+			$scope.result="信息["+$scope.name+","+$scope.address+"]已提交！"
+		};
+		$scope.listJson=[{name:"charles",address:"杭州市"},{name:"sea",address:"杭州市"}];
+	});
+	
+	app.controller("myCtrl2",function($scope,$rootScope){
+		//全局作用域
+		$rootScope.account="charles0525";
+		$scope.pwd="123456";
+	});
+</script>

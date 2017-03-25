@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+        	ng-model指令用于绑定应用程序数据到HTML控制器（input,select,textarea）,双向绑定
+        -->
+		<div >
+			<form name="myForm" ng-app="myApp" ng-controller="myCtrl">
+				姓名：<input type="text" ng-model="name" />  
+				{{name}} 
+				<span ng-bind="name"></span>
+				<br>
+				邮箱：<input type="email" name="myEmail" ng-model="text">
+				<span ng-show="myForm.myEmail.$error.email"></span>
+			</form>
+		</div>
+		
+		<!--
+			表单校验，验证结果用ng-show 
+			应用状态，ng-model 指令可以为应用数据提供状态值(invalid,dirty,touched,error)
+		-->
+		<!--<form ng-app="" name="myForm">
+			Email:
+			<input type="email" name="myAddress" ng-model="text">
+			<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span><br>
+			<h1>状态</h1>
+		   	<p>Valid:{{myForm.myAddress.$valid}}(合法为true)</p>
+		   	<p>Dirty:{{myForm.myAddress.$dirty}}(如果值改变为true)</p>
+		   	<p>Touched:{{myForm.myAddress.$touched}}(如果通过触屏点击则为true)</p>
+		</form>-->
+	</body>
+</html>
+<script>
+	var app=angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.name="charles";
+	});
+</script>

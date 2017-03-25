@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--AngularJS 指令是扩展的HTML属性，带有前缀ng- 
+			ng-app指令初始化一个AngularJS应用程序，根元素
+			ng-init指令初始化应用程序数据
+			ng-model 指令把元素绑定到应用程序
+		-->
+		<!--
+			数据绑定：ng-model=""
+			如下，文本通过ng-model属性进行同步绑定
+		-->
+		<div ng-app="" ng-init="quantity=1;price=5">
+			<h2>价格计算器</h2>
+			数量：<input type="number" ng-model="quantity" /><br>
+			价格：<input type="number" ng-model="price" /><br>
+			总价：<span ng-bind="quantity*price"></span> 
+			{{quantity*price}}
+		</div>
+	</body>
+</html>

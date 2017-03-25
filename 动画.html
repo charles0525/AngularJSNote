@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.div1 {
+				transition: all linear 0.5s;
+				background-color: lightblue;
+				height: 100px;
+				width: 100%;
+				position: relative;
+				top: 0;
+				left: 0;
+			}
+			.ng-hide {
+				height: 0;
+				width: 0;
+				background-color: transparent;
+				top: -200px;
+				left: 200px;
+			}
+			
+			.div2{
+				transition:height linear 0.5s;
+				-webkit-transition:height linear 0.5s;
+				background-color: lightblue;
+				height: 100px;
+				width: 100%;
+			}
+			.ng-hide{
+				height:0px;
+			}
+			
+		</style>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+	</head>
+
+	<body ng-app="myApp" ng-init="showDiv=true;">
+		<!--
+			AngularJS 使用动画需要引入angular-animate.min.js库
+			还需要在应用中使用模型ngAnimate
+		-->
+		<h1>隐藏DIV:<input type="checkbox" ng-model="myCheck"></h1>
+		<div class="div1" ng-hide="myCheck">测试</div>
+		<!--
+			ngAnimate模型可以添加或移除class，其不能使HTML元素产生动画，但ngAnimate会检测事件，
+			类似隐藏、显示HTML元素，如果事件发生，ngAnimate就会使用预定义的class来设置html元素
+			的动画
+			
+		-->
+		
+		<h1>显示DIV:<input type="checkbox" ng-model="showDiv"></h1>
+		<div class="div2" ng-show="showDiv">测试2</div>
+	</body>
+
+</html>
+<script>
+	angular.module("myApp", ["ngAnimate"]);
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<style type="text/css">
+			.myNote{
+				width:300px;min-height:150px;background-color:yellow;padding:15px;
+			}
+			.textArea{width:80%;height:60px;}
+		</style>
+	</head>
+	<body ng-app="myApp">
+		<div class="myNote" ng-controller='myNoteController'>
+			<h1>我的笔记</h1>
+			<textarea class="textArea" ng-model="note.content" ng-change="note.getLastCharCount()"></textarea><br>
+			<input ng-click="note.save()" type="button" value="保存" />
+			<input ng-click="note.clear()" type="button" value="清除" /><br>
+			<span>剩余字数：{{note.lastCount}}</span> <span>{{note.result}}</span>
+		</div>
+	</body>
+</html>
+<script>
+	var myApp=angular.module('myApp',[]);
+	//字符计算服务
+	myApp.service('MathService',function(){
+		this.computeLastCharCount=function(total,enterCount){
+			if(total<enterCount){
+				return 0;
+			}
+			return total-enterCount;
+		}
+	});
+	myApp.controller('myNoteController',function($scope,MathService){
+			$scope.note={
+				//保存
+				save:function(){
+					$scope.note.result='内容['+$scope.note.content+']保存成功';
+				},
+				//清除
+				clear:function(){
+					$scope.note.content='';
+					$scope.note.result='内容已清除';
+				},
+				//计算剩余字符
+				getLastCharCount:function(){
+					var enterCount=$scope.note.content.length;
+					var total=$scope.note.totalCount;
+					$scope.note.lastCount=MathService.computeLastCharCount(total,enterCount);
+				},
+				content:'',
+				result:'',
+				totalCount:100,
+				lastCount:100
+			};
+		});
+</script>

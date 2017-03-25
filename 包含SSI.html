@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+			使用 SSI, 你可在 HTML 中包含 HTML 文件，并发送到客户端浏览器。
+			在AngularJS中，可以使用ng-include指令来包含HTML文件
+			ng-include除了可以包含html文件外，还可以包含AngularJS代码。
+			默认情况下，ng-include指令不允许包含其他域名的文件，如果需要包含其他域名文件，需要设置
+			域名访问白名单，还需要设置服务端允许跨域访问。
+		-->
+		<div ng-app="">
+			<div ng-include="'_topSource.html'"></div>
+		</div>
+	</body>
+</html>

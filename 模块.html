@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<!--
+			模块定义了一个应用程序，模块是应用程序中不同部分的容器，是应用控制器的容器。
+			通过angular.module("appName",arr[])函数创建模块,
+			arr[]参数用于定义模块的依赖关系
+		-->
+		<div ng-app="myApp" ng-controller="myCtrl">
+			
+		</div>
+	</body>
+</html>
+<script>
+	angular.module("myApp",[]).controller("myCtrl",function($scope){
+		
+	});
+</script>
