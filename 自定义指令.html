@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 	</head>
-	<body>
+
+	<body ng-app="myApp">
 		<!--创建自定义指令
 			使用.directive()函数添加自定义指令，要调用自定义指令，元素上需要添加自定义指令名
 			可以通过以下方式调用：
@@ -15,37 +17,62 @@
 			4.注释来调用指令(需加districe:"M",replace:true)
 			directive:限制调用方式，默认EA（词意首字母大写），M：注释调用；A：属性调用，E作为元素名使用，C:类名使用
 		-->
-		<div ng-app="myApp">
-			<test-directive></test-directive>
+		<div>
+			<test1-directive></test1-directive>
 			<div test2-directive></div>
 			<div class="test3-directive"></div>
 			<!-- directive:test4-directive -->
 		</div>
+
+		<div ng-controller="ctl1">
+			<div>
+				<div>父scope：
+					<div>Say：{{name}}<br>改变父scope的name：<input type="text" value="" ng-model="name" /></div>
+				</div>
+				<div>隔离scope：这个显示为hello world
+					<div test-directive name="{{name}}"></div>
+				</div>
+				<div>隔离scope（不使用{{name}}这个就直接显示为name了）：
+					<div test-directive name="name"></div>
+				</div>
+			</div>
 	</body>
+
 </html>
 <script>
-	var app=angular.module("myApp",[]);
-	app.directive("testDirective",function(){
+	var app = angular.module("myApp", []);
+	app.directive("test1Directive", function() {
 		return {
-			template:"<h1>通过元素创建自定义指令</h1>"
+			template: "<h1>通过元素创建自定义指令</h1>"
 		};
 	});
-	app.directive("test2Directive",function(){
-		return{
-			template:"<h1>通过属性创建自定义指令2</h1>"
-		};
-	});
-	app.directive("test3Directive",function(){
-		return{
-			template:"<h1>通过类名创建自定义指令3</h1>",
-			restrict:"C"
-		};
-	});
-	app.directive("test4Directive",function(){
+	app.directive("test2Directive", function() {
 		return {
-			template:"<h1>通过注释创建自定义指令4</h1>",
-			restrict:"M",
-			replace:true
+			template: "<h1>通过属性创建自定义指令2</h1>"
 		};
+	});
+	app.directive("test3Directive", function() {
+		return {
+			template: "<h1>通过类名创建自定义指令3</h1>",
+			restrict: "C"
+		};
+	});
+	app.directive("test4Directive", function() {
+		return {
+			template: "<h1>通过注释创建自定义指令4</h1>",
+			restrict: "M",
+			replace: true
+		};
+	});
+
+	app.controller("ctl1", function($scope) {
+		$scope.name = "hello worldrrrrrr";
+	}).directive("testDirective", function() {
+		return {
+			scope: {
+				name: "@"
+			},
+			template: '{{name}}'
+		}
 	});
 </script>
